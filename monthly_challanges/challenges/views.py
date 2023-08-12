@@ -16,31 +16,42 @@ monthly_challenges = {
     "September": "Work with a new DevOps tool",
     "October": "Complete a coding challenge online",
     "November": "Mentor or teach a coding skill to someone else",
-    "December": None ,
+    "December": None,
 }
+
+
 def index(request):
     list_items = ""
-    months =list(monthly_challenges.keys())
+    months = list(monthly_challenges.keys())
 
-    return render(request, "challenges/index.html", {
-        "months" : months,
-    })
+    return render(
+        request,
+        "challenges/index.html",
+        {
+            "months": months,
+        },
+    )
+
 
 def monthly_challenge_by_number(request, month):
     months = list(monthly_challenges.keys())
-    
+
     if month > len(months):
         return HttpResponseNotFound("<h1>Invalid month!</h1>")
     redirect_month = months[month - 1]
-    redirect_path = reverse("month-challenge", args=[redirect_month]) # /challenge/january
-    return HttpResponseRedirect (redirect_path)
+    redirect_path = reverse(
+        "month-challenge", args=[redirect_month]
+    )  # /challenge/january
+    return HttpResponseRedirect(redirect_path)
+
 
 def monthly_challenge(request, month):
     try:
         challenge_text = monthly_challenges[month]
-        return render(request, "challenges/challenge.html", {
-            "text" : challenge_text,
-            "month_name" : month
-        })
+        return render(
+            request,
+            "challenges/challenge.html",
+            {"text": challenge_text, "month_name": month},
+        )
     except:
         return HttpResponseNotFound("<h1>This month is not supported!</h1>")
