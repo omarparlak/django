@@ -16,7 +16,7 @@ monthly_challenges = {
     "September": "Work with a new DevOps tool",
     "October": "Complete a coding challenge online",
     "November": "Mentor or teach a coding skill to someone else",
-    "December": "Explore a new area of technology or methodology",
+    "December": None ,
 }
 def index(request):
     list_items = ""
